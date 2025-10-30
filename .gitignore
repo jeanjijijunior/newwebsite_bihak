@@ -1,0 +1,37 @@
+# PHP
+*.log
+*.tmp
+
+# Database
+*.sql.bak
+*.db
+
+# Environment variables
+.env
+config.local.php
+
+# IDE and Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Dependencies
+vendor/
+node_modules/
+
+# Temporary and test files
+*.pyc
+__pycache__/
+chromedriver.exe
+*.exe
+page_snapshot.html
+test.html
+
+# Backup files
+*.bak
+*~
+*.swp
+*.swo

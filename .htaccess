@@ -1,0 +1,8 @@
+
+RewriteEngine On
+
+# Enable rewrite and set base if needed
+RewriteBase /
+
+# Redirect /user/{id} to user_detail.php?id={id}
+RewriteRule ^user/([0-9]+)$ user_detail.php?id=$1 [L,QSA]

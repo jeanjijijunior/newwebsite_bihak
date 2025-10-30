@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bihak Center</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favimg.png">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+        <img src="images/logob.png" alt="Bihak Center Logo">
+    </div>
+
+    <!-- Language Switcher in the Top Right Corner -->
+    <div class="language-switcher">
+        <a href="#" onclick="changeLanguage('fr'); return false;">Français</a> | 
+        <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+    </div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="work.html">Our Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+    	    <li><a href="opportunities.html">Opportunities</a></li>
+	    <li><a href="login-join.html">My account</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Google Translate Element (Hidden) -->
+<div id="google_translate_element" style="display: none;"></div>
+<script>
+  // Load Google Translate API
+  function loadGoogleTranslate() {
+      let googleTranslateScript = document.createElement('script');
+      googleTranslateScript.src = "https://translate.google.com/translate_a/element.js?cb=initGoogleTranslate";
+      document.body.appendChild(googleTranslateScript);
+  }
+  
+  // Initialize Google Translate
+  function initGoogleTranslate() {
+      new google.translate.TranslateElement({ 
+          pageLanguage: 'en', 
+          includedLanguages: 'en,fr',
+          layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+  }
+  
+  // Change Language Function
+  function changeLanguage(lang) {
+      if (!window.google || !window.google.translate) {
+          loadGoogleTranslate(); // Load if not available
+      }
+      
+      setTimeout(() => {
+          let select = document.querySelector(".goog-te-combo");
+          if (select) {
+              select.value = lang;
+              select.dispatchEvent(new Event("change"));
+          }
+      }, 1000);
+  }
+  
+  // Load Translation on Page Load
+  window.onload = loadGoogleTranslate;
+  </script>
+
+
+
+<section class="articles">
+  <section class="articles" id="user-form-section">
+  <div class="article">
+    <h2>Join the Bihak Community</h2>
+    <form action="store_user.php" method="post">
+      <label>Name:</label><br>
+      <input type="text" name="name" required><br>
+
+      <label>Age:</label><br>
+      <input type="number" name="age" required><br>
+
+      <label>Brief description:</label><br>
+      <textarea name="description" required></textarea><br>
+
+      <label>Username:</label><br>
+      <input type="text" name="username" required><br>
+
+      <label>Password:</label><br>
+      <input type="password" name="password" required><br>
+
+      <label>YouTube/Facebook Video Link:</label><br>
+      <input type="url" name="video_link"><br>
+
+      <h4>Category:</h4>
+      <label><input type="checkbox" name="category[]" value="Studies"> Studies</label>
+      <label><input type="checkbox" name="category[]" value="Entrepreneurship"> Entrepreneurship</label>
+      <label><input type="checkbox" name="category[]" value="Funding"> Funding</label>
+      <label><input type="checkbox" name="category[]" value="Scholarship"> Scholarship</label>
+      <label><input type="checkbox" name="category[]" value="Sponsorship"> Sponsorship</label>
+      <label><input type="checkbox" name="category[]" value="Talents"> Talents</label>
+      <label><input type="checkbox" name="category[]" value="Others"> Others</label><br>
+
+      <label>My request:</label><br>
+      <textarea name="request" required></textarea><br>
+
+      <label>My contacts:</label><br>
+      <input type="text" name="contacts" required><br><br>
+
+      <input type="submit" value="Submit" class="btn">
+    </form>
+  </div>
+
+  <div class="article">
+    <h2>User Login</h2>
+    <form action="login.php" method="post">
+      <label>Username:</label><br>
+      <input type="text" name="username" required><br>
+
+      <label>Password:</label><br>
+      <input type="password" name="password" required><br><br>
+
+      <input type="submit" value="Login" class="btn">
+    </form>
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-container">
+      <div class="footer-section">
+          <h3>Discover Our Programs</h3>
+          <ul>
+              <li><a href="#">Academic & Professional Orientation</a></li>
+              <li><a href="#">Project Development Coaching</a></li>
+              <li><a href="#">Financial Support</a></li>
+              <li><a href="#">Technology for Development</a></li>
+          </ul>
+      </div>
+
+      <div class="about-us">
+        <h3>About us</h3>
+        <ul>
+            <li><a href="#">Our vision</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Our motivation</a></li>
+            
+        </ul>
+    </div>
+      
+      <div class="social-links">
+          <h3>Follow Us</h3>
+          <ul >
+              <li>
+                  <a href="#"><img src="images/facebk.png" alt="Facebook"><span>Bihak Center</span></a>
+              </li>
+              <li>
+                  <a href="#"><img src="images/image.png" alt="Instagram"><span>Bihak Center</span></a>
+              </li>
+              <li>
+                  <a href="#">&nbsp;&nbsp;&nbsp;    <img src="images/xx.webp" alt="Twitter"><span>@bihak_center</span></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="footer-bottom">
+      <p>© 2025 Bihak Center | All Rights Reserved</p>
+  </div>
+</footer>
+
+<button onclick="topFunction()" id="myBtn">↑</button>
+<script>
+    let mybutton = document.getElementById("myBtn");
+    window.onscroll = function() {scrollFunction()};
+    function scrollFunction() {
+        mybutton.style.display = (document.documentElement.scrollTop > 30) ? "block" : "none";
+    }
+    function topFunction() {
+        document.documentElement.scrollTop = 0;
+    }
+</script>
+
+  
+  
+</body>
+</html>

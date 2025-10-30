@@ -1,0 +1,53 @@
+/**
+ * User Tiles Styling
+ * Separated styles for dynamic user content tiles
+ */
+
+.user-tiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.tile {
+    flex: 1 1 30%;
+    min-width: 250px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tile:first-child {
+    flex: 1 1 100%;
+    font-size: 1.2em;
+}
+
+.tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tile h3 {
+    margin-top: 0;
+    color: #1cabe2;
+}
+
+.tile p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.tile .btn {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tile {
+        flex: 1 1 100%;
+    }
+}

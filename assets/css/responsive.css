@@ -1,0 +1,416 @@
+/**
+ * Responsive Design for Bihak Center Website
+ * Mobile-first approach with enhanced breakpoints
+ */
+
+/* ========================================
+   MOBILE DEVICES (up to 480px)
+   ======================================== */
+@media (max-width: 480px) {
+    /* Body adjustments */
+    body {
+        padding: 0 10px;
+    }
+
+    /* Header */
+    header {
+        flex-direction: column;
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .logo img {
+        width: 150px;
+    }
+
+    .language-switcher {
+        position: static;
+        order: -1;
+        text-align: center;
+        width: 100%;
+        padding: 5px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .language-switcher a {
+        font-size: 14px;
+    }
+
+    /* Navigation - Hamburger menu style */
+    .navbar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 8px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+    }
+
+    /* Hero Section */
+    .hero {
+        flex-direction: column;
+        padding: 20px 15px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        width: 100%;
+        text-align: center;
+        order: 2;
+    }
+
+    .hero h1, .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .hero-image {
+        order: 1;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Articles */
+    .articles {
+        grid-template-columns: 1fr;
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .article {
+        padding: 15px;
+    }
+
+    .article img {
+        height: 180px;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-section,
+    .about-us,
+    .social-links {
+        min-width: 100%;
+        text-align: center;
+    }
+
+    .social-links ul li {
+        justify-content: center;
+    }
+
+    /* Scroll to top button */
+    #myBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        bottom: 15px;
+        right: 15px;
+    }
+}
+
+/* ========================================
+   TABLETS (481px to 768px)
+   ======================================== */
+@media (min-width: 481px) and (max-width: 768px) {
+    body {
+        padding: 0 15px;
+    }
+
+    /* Header */
+    header {
+        flex-wrap: wrap;
+        padding: 15px;
+    }
+
+    .logo img {
+        width: 180px;
+    }
+
+    .language-switcher {
+        top: 10px;
+        right: 10px;
+    }
+
+    .navbar {
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section */
+    .hero {
+        flex-direction: column;
+        padding: 25px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .hero h1, .hero h2 {
+        font-size: 1.75rem;
+    }
+
+    .hero-image {
+        width: 100%;
+    }
+
+    /* Articles */
+    .articles {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px 15px;
+        gap: 18px;
+    }
+
+    /* Footer */
+    .footer-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .footer-section,
+    .about-us,
+    .social-links {
+        flex: 1 1 45%;
+        min-width: 200px;
+    }
+}
+
+/* ========================================
+   SMALL LAPTOPS (769px to 992px)
+   ======================================== */
+@media (min-width: 769px) and (max-width: 992px) {
+    body {
+        max-width: 960px;
+    }
+
+    .logo img {
+        width: 180px;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-links li a {
+        font-size: 0.95rem;
+    }
+
+    .hero h1, .hero h2 {
+        font-size: 1.85rem;
+    }
+
+    .articles {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+}
+
+/* ========================================
+   MEDIUM LAPTOPS (993px to 1200px)
+   ======================================== */
+@media (min-width: 993px) and (max-width: 1200px) {
+    body {
+        max-width: 1100px;
+    }
+
+    .articles {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* ========================================
+   LARGE SCREENS (1201px and above)
+   ======================================== */
+@media (min-width: 1201px) {
+    body {
+        max-width: 1200px;
+    }
+
+    .hero h1, .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .articles {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ========================================
+   LANDSCAPE ORIENTATION FIXES
+   ======================================== */
+@media (max-height: 500px) and (orientation: landscape) {
+    header {
+        padding: 10px;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links li a {
+        padding: 5px 10px;
+        font-size: 0.85rem;
+    }
+
+    .hero {
+        padding: 15px;
+    }
+
+    .hero h1, .hero h2 {
+        font-size: 1.3rem;
+    }
+
+    .footer-container {
+        padding: 20px 10px;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY - REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+    header,
+    .language-switcher,
+    footer,
+    #myBtn {
+        display: none;
+    }
+
+    body {
+        max-width: 100%;
+        color: #000;
+        background: #fff;
+    }
+
+    .hero,
+    .article {
+        page-break-inside: avoid;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}
+
+/* ========================================
+   UTILITIES FOR RESPONSIVE IMAGES
+   ======================================== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Hide elements on mobile */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+/* Show only on mobile */
+.show-mobile {
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .show-mobile {
+        display: block !important;
+    }
+}
+
+/* ========================================
+   SCROLL TO TOP BUTTON RESPONSIVE
+   ======================================== */
+#myBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #1cabe2;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    width: 50px;
+    height: 50px;
+    display: none;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#myBtn:hover {
+    background-color: #147ba5;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    #myBtn {
+        width: 45px;
+        height: 45px;
+        padding: 12px;
+        font-size: 18px;
+        bottom: 15px;
+        right: 15px;
+    }
+}

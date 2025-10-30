@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>About Us - Bihak Center</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="images/favimg.png">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="images/logob.png" alt="Bihak Center Logo">
+    </div>
+    <div class="language-switcher">
+        <a href="#" onclick="changeLanguage('fr'); return false;">Français</a> | 
+        <a href="#" onclick="changeLanguage('en'); return false;">English</a>
+    </div>
+    <nav class="navbar">
+        <ul class="nav-links">
+             <li><a href="index.php">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="work.html">Our Work</a></li>
+            <li><a href="contact.html">Contact</a></li>
+    	    <li><a href="opportunities.html">Opportunities</a></li>
+	    <li><a href="login-join.html">My account</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="about-section">
+    <!-- ======= Slideshow Section ======= -->
+    <main class="about-slideshow-container">
+        <div class="about-mySlides fade">
+            
+            <img src="images/Designer_6.jpeg" alt="Career Coaching">
+            <div class="about-text">Career and Academic Coaching</div>
+        </div>
+
+        <div class="about-mySlides fade">
+           
+            <img src="images/IMAGETEST.webp" alt="Talent Promotion">
+            <div class="about-text">Talent and Innovation Promotion</div>
+        </div>
+
+        <div class="about-mySlides fade">
+           
+            <img src="images/Designer_8.jpeg" alt="Opportunities">
+            <div class="about-text">Opportunities</div>
+        </div>
+    </main>
+
+    <!-- Dots for Slideshow -->
+    <div style="text-align:center">
+        <span class="about-dot" onclick="currentSlide(1)"></span> 
+        <span class="about-dot" onclick="currentSlide(2)"></span> 
+        <span class="about-dot" onclick="currentSlide(3)"></span> 
+    </div>
+
+    <!-- ======= Vision, Mission, Motivation Section ======= -->
+    <article class="about-article">
+        <div class="about-flip-card">
+            <div class="about-flip-card-inner">
+                <div class="about-flip-card-front">
+                    OUR VISION
+                </div>
+                <div class="about-flip-card-back">
+                    A world where every person has the right skills and platforms to develop their 
+                    potential, improve their lives, and impact their communities.
+                </div>
+            </div>
+        </div>
+
+        <div class="about-flip-card">
+            <div class="about-flip-card-inner">
+                <div class="about-flip-card-front">
+                    OUR MISSION
+                </div>
+                <div class="about-flip-card-back">
+                    To help as many young people as possible unlock their potential 
+                    to make a positive impact in their environment.
+                </div>
+            </div>
+        </div>
+
+        <div class="about-flip-card">
+            <div class="about-flip-card-inner">
+                <div class="about-flip-card-front">
+                    OUR MOTIVATION
+                </div>
+                <div class="about-flip-card-back">
+                    We believe that God has placed potential in everyone, and we aim to help people 
+                    uncover and maximize that potential to lead a better life.
+                </div>
+            </div>
+        </div>
+    </article>
+</section>
+
+<!-- ======= Footer ======= -->
+<footer>
+  <div class="footer-container">
+      <div class="footer-section">
+          <h3>Discover Our Programs</h3>
+          <ul>
+              <li><a href="#">Academic & Professional Orientation</a></li>
+              <li><a href="#">Project Development Coaching</a></li>
+              <li><a href="#">Financial Support</a></li>
+              <li><a href="#">Technology for Development</a></li>
+          </ul>
+      </div>
+
+      <div class="about-us">
+        <h3>About us</h3>
+        <ul>
+            <li><a href="#">Our vision</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Our motivation</a></li>
+            
+        </ul>
+    </div>
+      
+      <div class="social-links">
+          <h3>Follow Us</h3>
+          <ul >
+              <li>
+                  <a href="#"><img src="images/facebk.png" alt="Facebook"><span>Bihak Center</span></a>
+              </li>
+              <li>
+                  <a href="#"><img src="images/image.png" alt="Instagram"><span>Bihak Center</span></a>
+              </li>
+              <li>
+                  <a href="#">&nbsp;&nbsp;&nbsp;    <img src="images/xx.webp" alt="Twitter"><span>@bihak_center</span></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+
+  <div class="footer-bottom">
+      <p>© 2025 Bihak Center | All Rights Reserved</p>
+  </div>
+</footer>
+
+<!-- ======= JavaScript for Slideshow ======= -->
+<script>
+let slideIndex = 0;
+showSlides();
+
+function showSlides() {
+    let i;
+    let slides = document.getElementsByClassName('about-mySlides');
+    let dots = document.getElementsByClassName('about-dot');
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = 'none';
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1;}
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(' about-active', '');
+    }
+    slides[slideIndex-1].style.display = 'block';
+    dots[slideIndex-1].className += ' about-active';
+    setTimeout(showSlides, 5000); // Change image every 5 seconds
+}
+
+// Manual slide control
+function currentSlide(n) {
+    slideIndex = n - 1;
+    showSlides();
+}
+</script>
+
+</body>
+</html>
