@@ -1,27 +1,36 @@
 <?php
 /**
- * Bihak Center - Home Page
- * Main landing page for the Bihak Center website
+ * Bihak Center - Home Page (New Version)
+ * Displays dynamic profiles from database
  */
 
 require_once __DIR__ . '/../config/database.php';
 
-// Fetch user stories from database
-$userStories = [];
+// Fetch profiles from database
+$profiles = [];
 try {
     $conn = getDatabaseConnection();
-    $result = $conn->query("SELECT * FROM usagers ORDER BY created_at DESC");
+
+    $query = "SELECT
+        id, full_name, title, short_description, profile_image,
+        media_type, media_url, city, district, field_of_study,
+        created_at, view_count
+    FROM profiles
+    WHERE status = 'approved' AND is_published = TRUE
+    ORDER BY created_at DESC
+    LIMIT 9";
+
+    $result = $conn->query($query);
 
     if ($result) {
         while ($row = $result->fetch_assoc()) {
-            $userStories[] = $row;
+            $profiles[] = $row;
         }
     }
 
     closeDatabaseConnection($conn);
 } catch (Exception $e) {
-    error_log($e->getMessage());
-    // Continue without user stories if database fails
+    error_log('Homepage Error: ' . $e->getMessage());
 }
 ?>
 <!DOCTYPE html>
@@ -33,14 +42,15 @@ try {
     <meta name="keywords" content="education, development, youth empowerment, Rwanda">
     <meta name="author" content="Bihak Center">
 
-    <title>Bihak Center - Home</title>
+    <title>Bihak Center - Empowering Youth</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/images/favimg.png">
 
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
-    <link rel="stylesheet" type="text/css" href="../assets/css/user-tiles.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/header.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/profiles.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/responsive.css">
 
     <!-- Google Fonts -->
@@ -48,110 +58,102 @@ try {
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="../assets/images/logob.png" alt="Bihak Center Logo">
-        </div>
-
-        <!-- Language Switcher -->
-        <div class="language-switcher">
-            <a href="#" onclick="changeLanguage('fr'); return false;">Français</a> |
-            <a href="#" onclick="changeLanguage('en'); return false;">English</a>
-        </div>
-
-        <!-- Navigation -->
-        <nav class="navbar">
-            <ul class="nav-links">
-                <li><a href="index.php" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="work.html">Our Work</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="opportunities.html">Opportunities</a></li>
-                <li><a href="login-join.html">My Account</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Google Translate Element (Hidden) -->
-    <div id="google_translate_element" style="display: none;"></div>
+    <?php include __DIR__ . '/../includes/header.php'; ?>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Welcome to Bihak Center</h1>
-            <p>Empowering young people through development and education.</p>
-            <a href="contact.html" class="cta-button">Get Involved</a>
+            <h1>Empowering Young People</h1>
+            <p>Share your story. Get support. Inspire others. Join our community of youth making a difference.</p>
+            <div class="hero-actions">
+                <a href="signup.php" class="cta-button primary">Share Your Story</a>
+                <a href="#stories" class="cta-button secondary">View Stories</a>
+            </div>
         </div>
         <div class="hero-image">
             <img src="../assets/images/Designer.jpeg" alt="Bihak Center Activities">
         </div>
     </section>
 
-    <!-- Success Stories Section -->
-    <section class="articles">
-        <h2 class="section-title">Success Stories</h2>
-
-        <div class="article">
-            <p>Sofia, an aspiring artist, wanted to attend an elite art school but couldn't afford tuition...</p>
-            <img src="../assets/images/Designer_5.jpeg" alt="Sofia's Artwork">
-            <a href="work.html#education" class="btn">Learn More</a>
+    <!-- Stories Section -->
+    <section id="stories" class="profiles-section">
+        <div class="section-header">
+            <h2>Youth Changing the World</h2>
+            <p>Meet the young people we support and the incredible things they're achieving</p>
         </div>
 
-        <div class="article">
-            <p>Sofia applied for multiple art scholarships and sold her work online to fund her education...</p>
-            <img src="../assets/images/Designer_6.jpeg" alt="Sofia Painting">
-            <a href="work.html#education" class="btn">Learn More</a>
-        </div>
+        <div id="profiles-container" class="profiles-grid">
+            <?php if (count($profiles) > 0): ?>
+                <?php foreach ($profiles as $index => $profile): ?>
+                    <div class="profile-card <?php echo $index === 0 ? 'featured' : ''; ?>" data-profile-id="<?php echo $profile['id']; ?>">
+                        <?php if ($index === 0): ?>
+                            <div class="featured-badge">Latest Story</div>
+                        <?php endif; ?>
 
-        <div class="article">
-            <p>David, a high school senior passionate about computer science, faced financial hardships...</p>
-            <img src="../assets/images/Designer_2.jpeg" alt="David's Work">
-            <a href="work.html#technology" class="btn">Learn More</a>
-        </div>
+                        <div class="profile-media">
+                            <?php if ($profile['media_type'] === 'video' && !empty($profile['media_url'])): ?>
+                                <video src="<?php echo htmlspecialchars($profile['media_url']); ?>" controls></video>
+                            <?php else: ?>
+                                <img src="<?php echo htmlspecialchars($profile['profile_image']); ?>" alt="<?php echo htmlspecialchars($profile['full_name']); ?>">
+                            <?php endif; ?>
+                        </div>
 
-        <div class="article">
-            <p>Through a crowdfunding campaign and mentorship, David raised enough to study software engineering...</p>
-            <img src="../assets/images/Designer_7.jpeg" alt="David Coding">
-            <a href="work.html#technology" class="btn">Learn More</a>
-        </div>
+                        <div class="profile-content">
+                            <h3 class="profile-name"><?php echo htmlspecialchars($profile['full_name']); ?></h3>
 
-        <div class="article">
-            <p>Sofia's perseverance led to her work being featured in galleries worldwide...</p>
-            <img src="../assets/images/Designer_4.jpeg" alt="Sofia's Gallery">
-            <a href="work.html#education" class="btn">Learn More</a>
-        </div>
+                            <p class="profile-title"><?php echo htmlspecialchars($profile['title']); ?></p>
 
-        <div class="article">
-            <p>David is now interning at a leading tech firm, applying his coding skills in real-world projects...</p>
-            <img src="../assets/images/Designer_3.jpeg" alt="David's Internship">
-            <a href="work.html#technology" class="btn">Learn More</a>
-        </div>
+                            <p class="profile-description">
+                                <?php echo htmlspecialchars(substr($profile['short_description'], 0, 150)); ?>
+                                <?php echo strlen($profile['short_description']) > 150 ? '...' : ''; ?>
+                            </p>
 
-        <div class="article">
-            <p>Sofia is mentoring other young artists, helping them secure grants and scholarships...</p>
-            <img src="../assets/images/Designer_1.jpeg" alt="Sofia Teaching">
-            <a href="work.html#education" class="btn">Learn More</a>
-        </div>
+                            <div class="profile-meta">
+                                <span class="location">
+                                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                    </svg>
+                                    <?php echo htmlspecialchars($profile['city'] . ', ' . $profile['district']); ?>
+                                </span>
+                                <?php if (!empty($profile['field_of_study'])): ?>
+                                    <span class="field">
+                                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                                            <path d="M8.5 2a.5.5 0 0 1 .5.5v9.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 12.293V2.5a.5.5 0 0 1 .5-.5z"/>
+                                        </svg>
+                                        <?php echo htmlspecialchars($profile['field_of_study']); ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
 
-        <div class="article">
-            <p>David is launching a startup to teach coding to underprivileged students...</p>
-            <img src="../assets/images/Designer_8.jpeg" alt="David's Startup">
-            <a href="work.html#technology" class="btn">Learn More</a>
-        </div>
-
-        <!-- Dynamic User Stories from Database -->
-        <?php if (!empty($userStories)): ?>
-            <div class="user-tiles">
-                <?php foreach ($userStories as $story): ?>
-                    <div class="tile">
-                        <h3><?php echo htmlspecialchars($story['name']); ?></h3>
-                        <p><?php echo substr(htmlspecialchars($story['description']), 0, 100); ?>...</p>
-                        <a href="user_detail.php?id=<?php echo $story['id']; ?>" class="btn">Read More</a>
+                            <a href="profile.php?id=<?php echo $profile['id']; ?>" class="profile-link">Read Full Story →</a>
+                        </div>
                     </div>
                 <?php endforeach; ?>
+            <?php else: ?>
+                <div class="no-profiles">
+                    <h3>No stories yet</h3>
+                    <p>Be the first to share your story!</p>
+                    <a href="signup.php" class="btn">Share Your Story</a>
+                </div>
+            <?php endif; ?>
+        </div>
+
+        <!-- Load More Button -->
+        <div class="load-more-container" style="<?php echo count($profiles) < 8 ? 'display: none;' : ''; ?>">
+            <button id="load-more-btn" class="btn-load-more">Load More Stories</button>
+            <div id="loading-spinner" class="loading-spinner" style="display: none;">
+                <div class="spinner"></div>
             </div>
-        <?php endif; ?>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Have a Story to Share?</h2>
+            <p>Join our community of young people making a difference. Share your journey, get support, and inspire others.</p>
+            <a href="signup.php" class="cta-button large">Share Your Story Today</a>
+        </div>
     </section>
 
     <!-- Footer -->
@@ -211,6 +213,8 @@ try {
 
     <!-- JavaScript -->
     <script src="../assets/js/translate.js"></script>
+    <script src="../assets/js/header.js"></script>
     <script src="../assets/js/scroll-to-top.js"></script>
+    <script src="../assets/js/profiles-loader.js"></script>
 </body>
 </html>
