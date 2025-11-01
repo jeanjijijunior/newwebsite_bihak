@@ -180,10 +180,13 @@
     }
 
     .social-links img {
-        width: 28px;
-        height: 28px;
-        filter: brightness(0) invert(1);
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
         transition: transform 0.3s ease;
+        background: white;
+        border-radius: 6px;
+        padding: 4px;
     }
 
     .social-links a:hover img {
